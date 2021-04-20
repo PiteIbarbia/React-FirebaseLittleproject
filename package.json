@@ -1,0 +1,36 @@
+{
+  "name": "ReactyFirebase",
+  "version": "1.0.0",
+  "description": "Build and launch React & Firebase real time applications using React, Parcel, Babel, React-Router, & more!",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiteIbarbia/React-FirebaseLittleproject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiteIbarbia/React-FirebaseLittleproject/issues"
+  },
+  "homepage": "https://github.com/PiteIbarbia/React-FirebaseLittleproject#readme",
+  "dependencies": {
+    "@reach/router": "^1.3.4",
+    "antd": "^4.15.0",
+    "load": "^1.0.2",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "parcel-bundler": "^1.12.5",
+    "react-hot-loader": "^4.13.0"
+  }
+}
