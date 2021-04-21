@@ -16,8 +16,8 @@ export default function PostSnippet(props) {
             >
                 <p className='article_content'>
                     {                        
-                        props.content.split('\n').map((paragraph, idx) => {
-                            return <p key={idx}>{paragraph}</p>;
+                        props.content.split('\n').map((paragraph) => {
+                            return <p>{paragraph}</p>;
                         })
                     }
                 </p>

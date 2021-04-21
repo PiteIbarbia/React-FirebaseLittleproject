@@ -3,8 +3,20 @@ html, body {
     height: 100%;
 }
 
-.app_conatinaer {
-    margin-top: 20px;
+.app_container {
     width: 1200px;
-    margin: 0% auto;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+
+.post_inputs_container {
+    margin-top: 20px;
+}
+
+.post_input_container {
+    margin-bottom: 20px;
+}
+
+.post_input_button {
+    float: right;
 }
