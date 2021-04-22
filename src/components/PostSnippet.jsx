@@ -11,13 +11,16 @@ export default function PostSnippet(props) {
                 type="inner"
                 title={props.title}
                 extra={
-                    <Link to={`/post/${porps.id}`}>Read Full Article</Link>
+                    <div className="post_snippet_links">
+                    <Link to={`/post/${props.id}`} style={{marginRight: '15px'}}>Read Full Article</Link>
+                    <Link to={`/update_post/${props.id}`}>Edit</Link>
+                    </div>
                 }
             >
                 <p className='article_content'>
                     {                        
-                        props.content.split('\n').map((paragraph) => {
-                            return <p>{paragraph}</p>;
+                        props.content.split('\n').map((paragraph, idx) => {
+                            return <p key={idx}>{paragraph}</p>;
                         })
                     }
                 </p>

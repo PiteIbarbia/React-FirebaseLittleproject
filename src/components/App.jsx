@@ -2,20 +2,34 @@ import React from 'react';
 import Posts from './Posts';
 import Post from './Post';
 import CreatePost from './CreatePost';
-import { Router } from "@reach/router"
-// import { BrowserRouter, Route } from "react-router-dom";
+import UpdatePost from './UpdatePost';
+import { Router, Link } from "@reach/router"
+import { Menu, Icon } from 'antd';
+
+// const { SubMenu } = Menu;
 
 
-function App(props) {
+export default function App(props) {
     return(
         <div className='app_container'>
+            <div className='app_main_navigation'>
+                <Menu mode="horizontal">
+                    <Menu.Item key="mail">
+                        <Icon type="read" />
+                        <Link to="/posts" style={{float: 'right'}}>Posts</Link>
+                    </Menu.Item>
+                    <Menu.Item key="app" disabled>
+                        <Icon type="highlight" />
+                        <Link to="/create_post" style={{float: 'right'}}>Create Post</Link>
+                    </Menu.Item>
+                </Menu>
+            </div>
             <Router>
-                <CreatePost default />
-                <Posts path="posts" />
+                <Posts path='posts' default />
                 <Post path="post/:id" />
+                <CreatePost path="create_post" />
+                <UpdatePost path="update_post/:id" />
             </Router>
         </div>
     )
 }
-
-export default App

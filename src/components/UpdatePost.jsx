@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHeader, Input, Button } from 'antd';
 import db from '../../firebase.js';
 import { navigate } from "@reach/router";
@@ -6,27 +6,34 @@ import { navigate } from "@reach/router";
 const { TextArea } = Input;
 
 
-const CreatePost = (props) => {
+const UpdatePost = (props) => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
+    useEffect(() => {
+        let postRef = db.collection('posts').doc(props.id);
+
+        postRef.get()
+            .then(doc => {
+                let { content, title } = doc.data();
+                setTitle(title);
+                setContent(content);
+            })
+    }, []);
+
     const onTitleChange = (event) => setTitle(event.target.value);
     const onContentChange = (event) => setContent(event.target.value);
 
-    const onCreatePost = () => {
-        let postRef = db.collection('posts');
+    const onEditPost = () => {
+        let postRef = db.collection('posts').doc(props.id);
         let payload = {title, content}
         
-        postRef.add(payload)
+        postRef.update(payload)
             .then(doc => {
-                console.log('Document successfully written!', doc.id);
+                console.log('Document successfully updated!', doc.id);
             })
-            .catch (err => {
-                console.log('I am error: ', err)
-            })
-            setTitle('');
-            setContent('');
+            
             navigate('/posts')
         }
 
@@ -62,7 +69,7 @@ const CreatePost = (props) => {
                     </div>
                 </div>
                 <div className="post_input_button">
-                    <Button type="primary" size="large" onClick={onCreatePost}>Create Post</Button>
+                    <Button type="primary" size="large" onClick={onEditPost}>Edit Post</Button>
                 </div>
             </div>
 
@@ -70,4 +77,4 @@ const CreatePost = (props) => {
     )
 }
 
-export default CreatePost
+export default UpdatePost
