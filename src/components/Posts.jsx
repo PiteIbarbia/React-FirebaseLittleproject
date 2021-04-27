@@ -41,7 +41,8 @@ export default function posts(props) {
               id={article.id}
               title={_.capitalize(article.title)}
               content={article.content.substring(1, 1000)}
-            />;
+              user={props.user}
+            />
           })
         }
       </div>
