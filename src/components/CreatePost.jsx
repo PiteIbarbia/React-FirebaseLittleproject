@@ -15,16 +15,14 @@ const CreatePost = (props) => {
     const onContentChange = (event) => setContent(event.target.value);
 
     const onCreatePost = () => {
-        let postRef = db.collection('posts');
+        let postRef = db.collection('users').doc(props.user.uid).collection('posts');
         let payload = {title, content}
         
         postRef.add(payload)
             .then(doc => {
                 console.log('Document successfully written!', doc.id);
             })
-            .catch (err => {
-                console.log('I am error: ', err)
-            })
+            
             setTitle('');
             setContent('');
             navigate('/posts')

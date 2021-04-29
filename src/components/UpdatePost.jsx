@@ -12,7 +12,7 @@ const UpdatePost = (props) => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        let postRef = db.collection('posts').doc(props.id);
+        let postRef = db.collection('users').doc(props.user.uid).collection('posts').doc(props.id);
 
         postRef.get()
             .then(doc => {
@@ -26,7 +26,7 @@ const UpdatePost = (props) => {
     const onContentChange = (event) => setContent(event.target.value);
 
     const onEditPost = () => {
-        let postRef = db.collection('posts').doc(props.id);
+        let postRef = db.collection('users').doc(props.user.uid).collection('posts').doc(props.id);
         let payload = {title, content}
         
         postRef.update(payload)

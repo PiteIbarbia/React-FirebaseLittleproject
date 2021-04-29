@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader, Card } from 'antd';
-import api from '../../mock_api';
 import db from '../../firebase';
 
 const Post = (props) => {
@@ -9,7 +8,7 @@ const Post = (props) => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        let postRef = db.collection('posts').doc(props.id);
+        let postRef = db.collection('users').doc(props.uid).collection('posts').doc(props.id);
 
         postRef.get()
             .then(doc => {

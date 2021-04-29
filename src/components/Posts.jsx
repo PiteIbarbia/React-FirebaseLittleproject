@@ -5,23 +5,22 @@ import _ from "lodash";
 import db from "../../firebase";
 
 export default function posts(props) {
-  const [posts, setposts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let postsRef = db.collection("posts");
 
-    postsRef.get()
-      .then((posts) => {
-        posts.forEach((post) => {
-          let { id } = post;
+    let useriD = props?.user.uid ? props?.user.uid : props.uid
+
+    db.collection("users").doc(props.user.uid).collection("posts")
+      .onSnapshot(async (posts) => {
+        let postsData = await posts.docs.map((post) => {
           let data = post.data();
-          let payload = {
-            id,
-            ...data,
-          };
-          setposts((posts) => [...posts, payload]);
+          let { id } = post;
+          let payload = { id, ...data };
+          return payload;
+        });
+        setPosts(postsData);
       });
-    });
   }, []);
 
   return (
@@ -34,17 +33,16 @@ export default function posts(props) {
       </div>
 
       <div className="articles_container">
-        {
-          _.map(posts, (article, idx) => {
-            <PostSnippet
-              key={idx}
-              id={article.id}
-              title={_.capitalize(article.title)}
-              content={article.content.substring(1, 1000)}
-              user={props.user}
-            />
-          })
-        }
+        {_.map(posts, (article, idx) => {
+          <PostSnippet
+            key={idx}
+            id={article.id}
+            title={_.capitalize(article.title)}
+            content={article.content.substring(1, 1000)}
+            user={props.user}
+            uid={props.uid}
+          />;
+        })}
       </div>
     </div>
   );
